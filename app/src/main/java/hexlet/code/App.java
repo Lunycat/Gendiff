@@ -3,24 +3,27 @@ package hexlet.code;
 import picocli.CommandLine;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
-import java.io.File;
+
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.concurrent.Callable;
 
 @CommandLine.Command(
         name="gendiff",
         version = "1.0.0",
         mixinStandardHelpOptions = true,
         description = "Compares two configuration files and shows a difference.")
-public class App implements Runnable {
+public class App implements Callable<String> {
 
     public static void main(String[] args) {
         new CommandLine(new App()).execute(args);
     }
 
     @Parameters(paramLabel = "filepath1", description = "path to first file")
-    File filepath1;
+    static Path filepath1;
 
     @Parameters(paramLabel = "filepath2", description = "path to second file")
-    File filepath2;
+    static Path filepath2;
 
     @Option(
             names = {"-f", "--format"},
@@ -30,7 +33,7 @@ public class App implements Runnable {
     String format;
 
     @Override
-    public void run() {
-        System.out.println("aaaa");
+    public String call() throws IOException {
+        return Differ.generate();
     }
 }
