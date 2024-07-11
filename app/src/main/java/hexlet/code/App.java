@@ -9,7 +9,7 @@ import java.nio.file.Path;
 import java.util.concurrent.Callable;
 
 @CommandLine.Command(
-        name="gendiff",
+        name = "gendiff",
         version = "1.0.0",
         mixinStandardHelpOptions = true,
         description = "Compares two configuration files and shows a difference.")

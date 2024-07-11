@@ -33,7 +33,7 @@ public class Differ {
     static Map<String, Object> getData(Path path) throws IOException {
 
         ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.readValue(path.toFile(), new TypeReference<>(){});
+        return objectMapper.readValue(path.toFile(), new TypeReference<>() { });
     }
 
     private static String stringFormat(String key, Map<String, Object> data1, Map<String, Object> data2) {

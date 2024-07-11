@@ -1,5 +1,6 @@
 plugins {
     application
+    checkstyle
 }
 
 group = "hexlet.code"
@@ -23,4 +24,8 @@ tasks.test {
 
 application {
     mainClass = "hexlet.code.App"
+}
+
+tasks.getByName("run", JavaExec::class) {
+    standardInput = System.`in`
 }
