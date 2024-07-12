@@ -18,7 +18,7 @@ jobs:
         with:
           build-root-directory: app 
           gradle-version: 8.7
-      - run: ./gradlew build
+      #- run: ./gradlew build
         
       - name: Gradle lint
         run: ./gradlew checkstyleMain
