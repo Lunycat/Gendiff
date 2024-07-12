@@ -18,15 +18,16 @@ jobs:
         with:
           gradle-version: 8.5
           
-      - name: Build Test
+      - name: Build
         working-directory: ./app
         run: ./gradlew build
-        
+
       - name: Publish code coverage
         uses: paambaati/codeclimate-action@v3.2.0
         env:
           CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
           JACOCO_SOURCE_PATH: app/src/main/java
         with:
-           coverageCommand: make report
+           working-directory: ./app
+           coverageCommand: ./gradlew jacocoTestReport
            coverageLocations: ${{github.workspace}}/app/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
