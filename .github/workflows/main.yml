@@ -16,7 +16,9 @@ jobs:
           distribution: 'temurin'
       - uses: gradle/actions/setup-gradle@v3
         with:
+          build-root-directory: app 
           gradle-version: 8.7
+          
       - name: Gradle build
         run: ./gradlew build
         
