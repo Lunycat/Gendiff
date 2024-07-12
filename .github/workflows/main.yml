@@ -18,11 +18,7 @@ jobs:
         with:
           build-root-directory: app
           gradle-version: 8.5
-          
-      - name: Build
-        working-directory: ./app
-        run: ./gradlew build
-
+          argument: build
       - name: Publish code coverage
         uses: paambaati/codeclimate-action@v3.2.0
         env:
