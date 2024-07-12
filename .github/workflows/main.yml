@@ -14,10 +14,10 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
-      #- uses: gradle/gradle-build-action@v3
-      #  with:
-      #    build-root-directory: app 
-      #    gradle-version: 8.7
+      - uses: gradle/gradle-build-action@v3
+        with:
+          build-root-directory: app 
+          gradle-version: 8.7
       - run: ./gradlew build
         
       - name: Gradle lint
