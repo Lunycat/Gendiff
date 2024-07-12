@@ -20,7 +20,7 @@ jobs:
           arguments: build
           build-root-directory: app
       - name: Build Test
-      - run: make -C app test
+        run: make -C app test
       - name: Publish code coverage
         uses: paambaati/codeclimate-action@v3.2.0
         env:
