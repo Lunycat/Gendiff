@@ -14,11 +14,11 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
-      - uses: gradle/actions/setup-gradle@v3
+      - uses: gradle/gradle-build-action@v3
         with:
           build-root-directory: app 
           gradle-version: 8.7
-      #- run: ./gradlew build
+      - run: ./gradlew build
         
       - name: Gradle lint
         run: ./gradlew checkstyleMain
