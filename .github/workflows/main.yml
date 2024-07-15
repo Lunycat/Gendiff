@@ -16,8 +16,12 @@ jobs:
           distribution: 'temurin'
       - uses: gradle/actions/setup-gradle@v3
         with:
-          arguments: build
           build-root-directory: app
+          
+      - name: Build with Gradle
+        working-directory: app
+        run: ./gradlew build
+        
       - name: Publish code coverage
         uses: paambaati/codeclimate-action@v5.0.0
         env:
