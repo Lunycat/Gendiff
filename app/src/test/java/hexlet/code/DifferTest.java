@@ -27,4 +27,14 @@ public class DifferTest {
 
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void plainTest() throws IOException {
+        String expected = Files.readString(Paths.get("src/test/resources/plain"));
+        String actual = Differ.generate(Paths.get("src/test/resources/file1.json"),
+                Paths.get("src/test/resources/file2.json"), "plain");
+        expected = expected.replace("\r", "");
+
+        assertEquals(expected, actual);
+    }
 }
