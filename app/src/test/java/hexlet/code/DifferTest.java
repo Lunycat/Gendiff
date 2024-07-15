@@ -9,10 +9,20 @@ import java.nio.file.Paths;
 public class DifferTest {
 
     @Test
-    public void stylishTest() throws IOException {
+    public void JSONTest() throws IOException {
         String expected = Files.readString(Paths.get("src/test/resources/stylish"));
         String actual = Differ.generate(Paths.get("src/test/resources/file1.json"),
                 Paths.get("src/test/resources/file2.json"));
+        expected = expected.replace("\r", "");
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void YAMLTest() throws IOException {
+        String expected = Files.readString(Paths.get("src/test/resources/stylish"));
+        String actual = Differ.generate(Paths.get("src/test/resources/file1.yaml"),
+                Paths.get("src/test/resources/file2.yaml"));
         expected = expected.replace("\r", "");
 
         assertEquals(expected, actual);
