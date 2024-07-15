@@ -1,10 +1,8 @@
 package hexlet.code.formatters;
 
 import hexlet.code.Formatter;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.Set;
-import java.util.StringJoiner;
+
+import java.util.*;
 
 public class Plain extends Formatter {
 
@@ -14,25 +12,30 @@ public class Plain extends Formatter {
         StringJoiner sj = new StringJoiner("\n");
 
         keys.forEach(k -> {
-            String value1 = isObject(k) ? "[complex value]" : String.valueOf(data1.get(k));
-            String value2 = isObject(k) ? "[complex value]" : String.valueOf(data2.get(k));
+            String value1 = formatValue(data1.get(k));
+            String value2 = formatValue(data2.get(k));
 
             if (!data1.containsKey(k)) {
-                sj.add(String.format("Property '%s' was added with value: '%s'", k, value2));
+                sj.add(String.format("Property '%s' was added with value: %s", k, value2));
             } else if (!data2.containsKey(k)) {
-                sj.add(String.format("  - %s: %s", k, value1));
-            } else if (value1.equals(value2)) {
-                sj.add(String.format("    %s: %s", k, value1));
-            } else {
-                sj.add(String.format("  - %s: %s", k, value1));
-                sj.add(String.format("  + %s: %s", k, value2));
+                sj.add(String.format("Property '%s' was removed", k));
+            } else if (!value1.equals(value2)) {
+                sj.add(String.format("Property '%s' was updated. From %s to %s", k, value1, value2));
             }
         });
 
         return sj.toString();
     }
 
-    private static boolean isObject(Object o) {
-        return o == null || o instanceof Arrays;
+    private static String formatValue(Object o) {
+        String value;
+        if (o instanceof String) {
+            value = String.format("'%s'", o);
+        } else if (o instanceof Collection<?> || o instanceof Map<?,?>) {
+            value = "[complex value]";
+        } else {
+            value = String.valueOf(o);
+        }
+        return value;
     }
 }
