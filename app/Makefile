@@ -11,7 +11,7 @@ start:
 	APP_ENV=development ./gradlew run
 
 installDist:
-	./gradlew installDist
+	./gradlew clean installDist
 
 run-dist:
 	./build/install/app/bin/app

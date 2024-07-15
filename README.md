@@ -37,3 +37,4 @@ Property 'group2' was removed
 ```
 
 1) Сравнение .json и .yaml форматов на моём [asciinema](https://asciinema.org/a/jT407JCZaA1pHbggllm9IV7Mw)
+2) Сравнение вложенных файлов на моём [asciinema](https://asciinema.org/a/vLbOpBsGjgzwwv3Vzlee5vGOi)
