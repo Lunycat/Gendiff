@@ -10,7 +10,7 @@ public class DifferTest {
 
     @Test
     public void jsonTest() throws IOException {
-        String expected = Files.readString(Paths.get("src/test/resources/stylish"));
+        String expected = Files.readString(Paths.get("src/test/resources/stylishForAttachedFiles"));
         String actual = Differ.generate(Paths.get("src/test/resources/file1.json"),
                 Paths.get("src/test/resources/file2.json"));
         expected = expected.replace("\r", "");
@@ -20,7 +20,7 @@ public class DifferTest {
 
     @Test
     public void yamlTest() throws IOException {
-        String expected = Files.readString(Paths.get("src/test/resources/stylish"));
+        String expected = Files.readString(Paths.get("src/test/resources/stylishForFlatFiles"));
         String actual = Differ.generate(Paths.get("src/test/resources/file1.yaml"),
                 Paths.get("src/test/resources/file2.yaml"));
         expected = expected.replace("\r", "");

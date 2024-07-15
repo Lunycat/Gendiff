@@ -10,7 +10,7 @@ import java.util.TreeSet;
 
 public class Differ {
 
-    public static String generate(Path filepath1, Path filepath2) throws IOException {
+    public static String generate(Path filepath1, Path filepath2, String format) throws IOException {
 
         StringJoiner sj = new StringJoiner("\n", "{\n", "\n}");
         File file1 = filepath1.toFile().getAbsoluteFile();
@@ -20,26 +20,16 @@ public class Differ {
         Set<String> keys = new TreeSet<>(mapOfFile1.keySet());
         keys.addAll(mapOfFile2.keySet());
 
-        keys.forEach(k -> sj.add(stringFormat(k, mapOfFile1, mapOfFile2)));
+        for (String key : keys) {
+            sj.add(Formater.format(key, mapOfFile1, mapOfFile2, format));
+        }
+
+        //keys.forEach(k -> sj.add(Formater.format(k, mapOfFile1, mapOfFile2, format)));
 
         return sj.toString();
     }
 
-    private static String stringFormat(String key, Map<String, Object> data1, Map<String, Object> data2) {
-
-        String result;
-
-        if (!data1.containsKey(key)) {
-            result = String.format("  + %s: %s", key, data2.get(key));
-        } else if (!data2.containsKey(key)) {
-            result = String.format("  - %s: %s", key, data1.get(key));
-        } else if (data1.get(key).equals(data2.get(key))) {
-            result = String.format("    %s: %s", key, data1.get(key));
-        } else {
-            result = String.format("  - %s: %s\n", key, data1.get(key));
-            result += String.format("  + %s: %s", key, data2.get(key));
-        }
-
-        return result;
+    public static String generate(Path filepath1, Path filepath2) throws IOException {
+        return generate(filepath1, filepath2, "stylish");
     }
 }
