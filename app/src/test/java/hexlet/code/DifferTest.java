@@ -17,19 +17,18 @@ public class DifferTest {
         expected1 = expected1.replace("\r", "");
         expected2 = expected2.replace("\r", "");
 
-        String actual1 = Differ.generate(Paths.get("src/test/resources/file1.json"),
-                Paths.get("src/test/resources/file2.yaml"));
-        String actual2 = Differ.generate(Paths.get("src/test/resources/file1.yaml"),
-                Paths.get("src/test/resources/file2.json"), "plain");
-        String actual3 = Differ.generate(Paths.get("src/test/resources/file1.yaml"),
-                Paths.get("src/test/resources/file2.json"), "json");
+        String actual1 = Differ.generate("src/test/resources/file1.json", "src/test/resources/file2.json");
+        String actual2 = Differ.generate("src/test/resources/file1.yaml",
+                "src/test/resources/file2.yaml", "plain");
+        String actual3 = Differ.generate("src/test/resources/file1.json",
+                "src/test/resources/file2.json", "json");
         actual3 = actual3.replace("\r", "");
 
         assertEquals(expected1, actual1);
         assertEquals(expected2, actual2);
         assertEquals(expected3, actual3);
         assertThrows(IllegalArgumentException.class, () ->
-                Differ.generate(Paths.get("src/test/resources/file1.yaml"),
-                Paths.get("src/test/resources/file2.json"), "dasdasdsa"));
+                Differ.generate("src/test/resources/file1.yaml",
+                        "src/test/resources/file2.json", "dasdasdsa"));
     }
 }

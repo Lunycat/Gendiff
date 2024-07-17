@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringJoiner;
 
-public class Stylish implements Formated {
+public final class Stylish implements Formated {
 
     @Override
     public String format(Set<String> keys, Map<String, Object> data1, Map<String, Object> data2) {

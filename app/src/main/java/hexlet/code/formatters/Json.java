@@ -8,7 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.Set;
 import java.util.Map;
 
-public class Json implements Formated {
+public final class Json implements Formated {
 
     @Override
     public String format(Set<String> keys, Map<String, Object> data1, Map<String, Object> data2) {

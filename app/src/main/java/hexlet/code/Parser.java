@@ -15,7 +15,7 @@ public class Parser {
 
         if (file.getName().contains(".json")) {
             objectMapper = new ObjectMapper();
-        } else if (file.getName().contains(".yaml")) {
+        } else if (file.getName().contains(".yaml") || file.getName().contains(".yml")) {
             objectMapper = new YAMLMapper();
         }
 
