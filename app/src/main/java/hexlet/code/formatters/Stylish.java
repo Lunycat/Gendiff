@@ -1,13 +1,11 @@
 package hexlet.code.formatters;
 
-import hexlet.code.Formatter;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringJoiner;
 
-public class Stylish extends Formatter {
+public class Stylish implements Formated {
 
-    @Override
     public String format(Set<String> keys, Map<String, Object> data1, Map<String, Object> data2) {
 
         StringJoiner sj = new StringJoiner("\n", "{\n", "\n}");

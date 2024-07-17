@@ -1,5 +1,6 @@
 package hexlet.code;
 
+import hexlet.code.formatters.Formatter;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -10,9 +11,6 @@ import java.util.TreeSet;
 public class Differ {
 
     public static String generate(Path filepath1, Path filepath2, String format) throws IOException {
-
-        Formatter formatter = Formatter.choiceFormat(format);
-
         File file1 = filepath1.toFile().getAbsoluteFile();
         File file2 = filepath2.toFile().getAbsoluteFile();
 
@@ -22,7 +20,7 @@ public class Differ {
         Set<String> keys = new TreeSet<>(mapOfFile1.keySet());
         keys.addAll(mapOfFile2.keySet());
 
-        return formatter.format(keys, mapOfFile1, mapOfFile2);
+        return Formatter.choiceFormat(keys, mapOfFile1, mapOfFile2, format);
     }
 
     public static String generate(Path filepath1, Path filepath2) throws IOException {
