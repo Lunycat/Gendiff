@@ -14,8 +14,6 @@ public class DifferTest {
         String expected1 = Files.readString(Paths.get("src/test/resources/stylish"));
         String expected2 = Files.readString(Paths.get("src/test/resources/plain"));
         String expected3 = Files.readString(Paths.get("src/test/resources/json.json"));
-        expected1 = expected1.replace("\r", "");
-        expected2 = expected2.replace("\r", "");
 
         String actual1 = Differ.generate("src/test/resources/file1.json", "src/test/resources/file2.json");
         String actual2 = Differ.generate("src/test/resources/file1.yaml",
