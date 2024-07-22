@@ -1,5 +1,6 @@
 package hexlet.code;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -9,22 +10,75 @@ import java.nio.file.Paths;
 
 public class DifferTest {
 
+    String expectedStylish;
+    String expectedPlain;
+    String expectedJson;
+
+    @BeforeEach
+    public void beforeEach() throws IOException {
+        expectedStylish = Files.readString(Paths.get("src/test/resources/stylish"));
+        expectedPlain = Files.readString(Paths.get("src/test/resources/plain"));
+        expectedJson = Files.readString(Paths.get("src/test/resources/json.json"));
+    }
+
     @Test
-    public void test() throws IOException {
-        String expected1 = Files.readString(Paths.get("src/test/resources/stylish"));
-        String expected2 = Files.readString(Paths.get("src/test/resources/plain"));
-        String expected3 = Files.readString(Paths.get("src/test/resources/json.json"));
+    public void stylishJsonTest() throws IOException {
+        String actual = Differ.generate("src/test/resources/file1.json",
+                "src/test/resources/file2.json", "stylish");
+        assertEquals(expectedStylish, actual);
+    }
 
-        String actual1 = Differ.generate("src/test/resources/file1.json", "src/test/resources/file2.json");
-        String actual2 = Differ.generate("src/test/resources/file1.yaml",
+    @Test
+    public void stylishYamlTest() throws IOException {
+        String actual = Differ.generate("src/test/resources/file1.yaml",
+                "src/test/resources/file2.yaml", "stylish");
+        assertEquals(expectedStylish, actual);
+    }
+
+    @Test
+    public void plainJsonTest() throws IOException {
+        String actual = Differ.generate("src/test/resources/file1.json",
+                "src/test/resources/file2.json", "plain");
+        assertEquals(expectedPlain, actual);
+    }
+
+    @Test
+    public void plainYamlTest() throws IOException {
+        String actual = Differ.generate("src/test/resources/file1.yaml",
                 "src/test/resources/file2.yaml", "plain");
-        String actual3 = Differ.generate("src/test/resources/file1.json",
-                "src/test/resources/file2.json", "json");
-        actual3 = actual3.replace("\r", "");
+        assertEquals(expectedPlain, actual);
+    }
 
-        assertEquals(expected1, actual1);
-        assertEquals(expected2, actual2);
-        assertEquals(expected3, actual3);
+    @Test
+    public void jsonJsonTest() throws IOException {
+        String actual = Differ.generate("src/test/resources/file1.json",
+                "src/test/resources/file2.json", "json");
+        actual = actual.replace("\r", "");
+        assertEquals(expectedJson, actual);
+    }
+
+    @Test
+    public void jsonYamlTest() throws IOException {
+        String actual = Differ.generate("src/test/resources/file1.yaml",
+                "src/test/resources/file2.yaml", "json");
+        actual = actual.replace("\r", "");
+        assertEquals(expectedJson, actual);
+    }
+
+    @Test
+    public void generateDefaultJsonTest() throws IOException {
+        String actual = Differ.generate("src/test/resources/file1.json", "src/test/resources/file2.json");
+        assertEquals(expectedStylish, actual);
+    }
+
+    @Test
+    public void generateYamlJsonTest() throws IOException {
+        String actual = Differ.generate("src/test/resources/file1.yaml", "src/test/resources/file2.yaml");
+        assertEquals(expectedStylish, actual);
+    }
+
+    @Test
+    public void generateExceptionTest() {
         assertThrows(IllegalArgumentException.class, () ->
                 Differ.generate("src/test/resources/file1.yaml",
                         "src/test/resources/file2.json", "dasdasdsa"));
