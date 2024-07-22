@@ -1,27 +1,33 @@
 package hexlet.code.formatters;
 
+import java.util.StringJoiner;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Collection;
 import java.util.Map;
-import java.util.Set;
-import java.util.StringJoiner;
 
 public final class Plain implements Formated {
 
     @Override
-    public String format(Set<String> keys, Map<String, Object> data1, Map<String, Object> data2) {
+    public String format(List<LinkedHashMap<String, Object>> tree) {
 
         StringJoiner sj = new StringJoiner("\n");
 
-        keys.forEach(k -> {
-            String value1 = formatValue(data1.get(k));
-            String value2 = formatValue(data2.get(k));
+        tree.forEach(m -> {
+            String value1 = m.get("type").equals("changed")
+                    ? formatValue(m.get("value1"))
+                    : formatValue(m.get("value"));
+            String value2 = m.get("type").equals("changed")
+                    ? formatValue(m.get("value2"))
+                    : formatValue(m.get("value"));
+            Object key = m.get("key");
 
-            if (!data1.containsKey(k)) {
-                sj.add(String.format("Property '%s' was added with value: %s", k, value2));
-            } else if (!data2.containsKey(k)) {
-                sj.add(String.format("Property '%s' was removed", k));
-            } else if (!String.valueOf(data1.get(k)).equals(String.valueOf(data2.get(k)))) {
-                sj.add(String.format("Property '%s' was updated. From %s to %s", k, value1, value2));
+            if (m.get("type").equals("added")) {
+                sj.add(String.format("Property '%s' was added with value: %s", key, value1));
+            } else if (m.get("type").equals("deleted")) {
+                sj.add(String.format("Property '%s' was removed", key));
+            } else if (!String.valueOf(m.get("value1")).equals(String.valueOf(m.get("value2")))) {
+                sj.add(String.format("Property '%s' was updated. From %s to %s", key, value1, value2));
             }
         });
 

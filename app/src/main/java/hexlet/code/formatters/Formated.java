@@ -1,8 +1,8 @@
 package hexlet.code.formatters;
 
-import java.util.Map;
-import java.util.Set;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 public interface Formated {
-    String format(Set<String> keys, Map<String, Object> data1, Map<String, Object> data2);
+    String format(List<LinkedHashMap<String, Object>> tree);
 }

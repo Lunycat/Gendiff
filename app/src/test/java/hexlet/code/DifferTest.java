@@ -8,11 +8,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class DifferTest {
+public final class DifferTest {
 
-    String expectedStylish;
-    String expectedPlain;
-    String expectedJson;
+    private String expectedStylish;
+    private String expectedPlain;
+    private String expectedJson;
 
     @BeforeEach
     public void beforeEach() throws IOException {

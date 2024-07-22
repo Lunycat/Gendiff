@@ -1,29 +1,34 @@
 package hexlet.code.formatters;
 
-import java.util.Map;
-import java.util.Set;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.StringJoiner;
 
 public final class Stylish implements Formated {
 
     @Override
-    public String format(Set<String> keys, Map<String, Object> data1, Map<String, Object> data2) {
+    public String format(List<LinkedHashMap<String, Object>> tree) {
 
         StringJoiner sj = new StringJoiner("\n", "{\n", "\n}");
 
-        keys.forEach(k -> {
-            String value1 = String.valueOf(data1.get(k));
-            String value2 = String.valueOf(data2.get(k));
+        tree.forEach(m -> {
+            Object value1 = m.get("type").equals("changed")
+                    ? m.get("value1")
+                    : m.get("value");
+            Object value2 = m.get("type").equals("changed")
+                    ? m.get("value2")
+                    : m.get("value");
+            Object key = m.get("key");
 
-            if (!data1.containsKey(k)) {
-                sj.add(String.format("  + %s: %s", k, value2));
-            } else if (!data2.containsKey(k)) {
-                sj.add(String.format("  - %s: %s", k, value1));
-            } else if (value1.equals(value2)) {
-                sj.add(String.format("    %s: %s", k, value1));
+            if (m.get("type").equals("added")) {
+                sj.add(String.format("  + %s: %s", key, value1));
+            } else if (m.get("type").equals("deleted")) {
+                sj.add(String.format("  - %s: %s", key, value1));
+            } else if (m.get("type").equals("unchanged")) {
+                sj.add(String.format("    %s: %s", key, value1));
             } else {
-                sj.add(String.format("  - %s: %s", k, value1));
-                sj.add(String.format("  + %s: %s", k, value2));
+                sj.add(String.format("  - %s: %s", key, value1));
+                sj.add(String.format("  + %s: %s", key, value2));
             }
         });
 

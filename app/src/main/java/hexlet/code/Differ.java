@@ -10,6 +10,10 @@ import java.util.TreeSet;
 
 public class Differ {
 
+    public static String generate(String filepath1, String filepath2) throws IOException {
+        return generate(filepath1, filepath2, "stylish");
+    }
+
     public static String generate(String filepath1, String filepath2, String format) throws IOException {
         File file1 = Paths.get(filepath1).toAbsolutePath().normalize().toFile();
         File file2 = Paths.get(filepath2).toAbsolutePath().normalize().toFile();
@@ -20,10 +24,6 @@ public class Differ {
         Set<String> keys = new TreeSet<>(mapOfFile1.keySet());
         keys.addAll(mapOfFile2.keySet());
 
-        return Formatter.choiceFormat(keys, mapOfFile1, mapOfFile2, format);
-    }
-
-    public static String generate(String filepath1, String filepath2) throws IOException {
-        return generate(filepath1, filepath2, "stylish");
+        return Formatter.choiceFormat(TreeBuilder.treeBuild(keys, mapOfFile1, mapOfFile2), format);
     }
 }
