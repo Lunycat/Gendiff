@@ -1,13 +1,13 @@
 package hexlet.code.formatters;
 
-import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.List;
 import java.util.StringJoiner;
 
 public final class Stylish implements Formated {
 
     @Override
-    public String format(List<LinkedHashMap<String, Object>> tree) {
+    public String format(List<Map<String, Object>> tree) {
 
         StringJoiner sj = new StringJoiner("\n", "{\n", "\n}");
 

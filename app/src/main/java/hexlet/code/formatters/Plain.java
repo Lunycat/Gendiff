@@ -1,7 +1,6 @@
 package hexlet.code.formatters;
 
 import java.util.StringJoiner;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Collection;
 import java.util.Map;
@@ -9,7 +8,7 @@ import java.util.Map;
 public final class Plain implements Formated {
 
     @Override
-    public String format(List<LinkedHashMap<String, Object>> tree) {
+    public String format(List<Map<String, Object>> tree) {
 
         StringJoiner sj = new StringJoiner("\n");
 

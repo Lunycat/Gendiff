@@ -10,15 +10,15 @@ public class TreeBuilder {
 
     private static final int CAPACITY_OF_NODE = 1;
 
-    public static List<LinkedHashMap<String, Object>> treeBuild(Set<String> keys,
+    public static List<Map<String, Object>> treeBuild(Set<String> keys,
                                                       Map<String, Object> data1, Map<String, Object> data2) {
 
-        List<LinkedHashMap<String, Object>> tree = new ArrayList<>();
+        List<Map<String, Object>> tree = new ArrayList<>();
 
         keys.forEach(k -> {
             String value1 = String.valueOf(data1.get(k));
             String value2 = String.valueOf(data2.get(k));
-            LinkedHashMap<String, Object> node = new LinkedHashMap<>(CAPACITY_OF_NODE);
+            Map<String, Object> node = new LinkedHashMap<>(CAPACITY_OF_NODE);
 
             if (!data1.containsKey(k)) {
                 node.put("key", k);

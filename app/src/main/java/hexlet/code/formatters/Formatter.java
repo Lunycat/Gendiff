@@ -1,11 +1,11 @@
 package hexlet.code.formatters;
 
-import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Formatter {
 
-    public static String choiceFormat(List<LinkedHashMap<String, Object>> tree, String format) {
+    public static String choiceFormat(List<Map<String, Object>> tree, String format) {
 
         return switch (format) {
             case "stylish" -> new Stylish().format(tree);
